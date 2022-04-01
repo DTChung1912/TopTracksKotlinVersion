@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragment.setting.SettingFragment">
+
+    <ImageView
+        android:background="@drawable/custom_profile"
+        android:layout_marginTop="@dimen/dimen_50dp"
+        android:layout_gravity="center"
+        android:id="@+id/profileImage"
+        android:layout_width="@dimen/dimen_160dp"
+        android:layout_height="@dimen/dimen_160dp"
+        android:src="@drawable/ic_baseline_person_24">
+    </ImageView>
+    <Button
+        android:layout_marginTop="@dimen/dimen_50dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/upload"
+        android:text="Upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/test"
+        android:text="a"
+        android:textSize="10sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

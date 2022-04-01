@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TopTracksKotlinVersion</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_fragment">Login</string>
+    <string name="Register_fragment">Register</string>
+    <string name="TopTracks_fragment">TopTracks</string>
+    <string name="Purchases_fragment">Purchases</string>
+    <string name="Free_fragment">Free</string>
+    <string name="Setting_fragment">Setting</string>
+</resources>

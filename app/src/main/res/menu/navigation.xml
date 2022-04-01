@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_toptracks"
+        android:icon="@drawable/ic_music"
+        android:title="@string/TopTracks_fragment" />
+
+    <item
+        android:id="@+id/navigation_purchases"
+        android:icon="@drawable/ic_music"
+        android:title="@string/Purchases_fragment" />
+
+    <item
+        android:id="@+id/navigation_free"
+        android:icon="@drawable/ic_music"
+        android:title="@string/Free_fragment" />
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/Setting_fragment" />
+
+</menu>
