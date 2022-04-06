@@ -20,8 +20,6 @@ import com.example.toptrackskotlinversion.Model.Constants.KEY_CAMERA_TAKEN
 import com.example.toptrackskotlinversion.R
 import com.example.toptrackskotlinversion.View.CameraActivity
 import com.example.toptrackskotlinversion.View.ImageUtils
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 class SettingFragment(private val profileImageForMain: ProfileImageForMain) : Fragment(),
@@ -30,7 +28,7 @@ class SettingFragment(private val profileImageForMain: ProfileImageForMain) : Fr
     private lateinit var presenter: SettingFragmentPresenter
     private lateinit var profileImage: ImageView
     private lateinit var upload: Button
-    private lateinit var imageSize : TextView
+    private lateinit var imageSize: TextView
 
     private var imageUri: String? = null
     private lateinit var uri: Uri
@@ -44,7 +42,6 @@ class SettingFragment(private val profileImageForMain: ProfileImageForMain) : Fr
 
         profileImage = view.findViewById(R.id.profileImage)
         upload = view.findViewById(R.id.upload)
-        imageSize = view.findViewById(R.id.imageSize)
 
         presenter = SettingFragmentPresenter()
         presenter.attachView(this)
@@ -71,7 +68,7 @@ class SettingFragment(private val profileImageForMain: ProfileImageForMain) : Fr
                                 requireContext().contentResolver,
                                 uri
                             )
-                            ImageUtils.loadCircleImage(profileImage, compressImage(imageBitmap)!!)
+                            ImageUtils.loadCircleImage(profileImage, imageBitmap)
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
@@ -102,27 +99,5 @@ class SettingFragment(private val profileImageForMain: ProfileImageForMain) : Fr
     }
 
     override fun onError(msg: String?) {
-    }
-
-    private fun compressImage(image: Bitmap): Bitmap? {
-        val baos = ByteArrayOutputStream()
-        image.compress(
-            Bitmap.CompressFormat.JPEG,
-            100,
-            baos
-        )
-        var options = 90
-        while (baos.toByteArray().size / 1024 > 400) {
-            baos.reset() //Reset baos is empty baos
-            image.compress(
-                Bitmap.CompressFormat.JPEG,
-                options,
-                baos
-            )
-            options -= 10
-        }
-        val isBm =
-            ByteArrayInputStream(baos.toByteArray())
-        return BitmapFactory.decodeStream(isBm, null, null)
     }
 }

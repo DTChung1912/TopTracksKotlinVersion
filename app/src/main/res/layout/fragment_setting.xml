@@ -7,28 +7,20 @@
     tools:context=".Fragment.setting.SettingFragment">
 
     <ImageView
-        android:background="@drawable/custom_profile"
-        android:layout_marginTop="@dimen/dimen_50dp"
-        android:layout_gravity="center"
         android:id="@+id/profileImage"
         android:layout_width="@dimen/dimen_160dp"
         android:layout_height="@dimen/dimen_160dp"
-        android:src="@drawable/ic_baseline_person_24">
-    </ImageView>
-    <Button
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/dimen_50dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/upload"
-        android:text="Upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:background="@drawable/custom_profile"
+        android:src="@drawable/ic_baseline_person_24"></ImageView>
 
-    <TextView
-        android:id="@+id/imageSize"
-        android:text="0"
-        android:textSize="30sp"
-        android:layout_gravity="center_horizontal"
+    <Button
+        android:id="@+id/upload"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_50dp"
+        android:text="Upload" />
 
 </LinearLayout>

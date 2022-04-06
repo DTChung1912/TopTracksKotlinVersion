@@ -3,7 +3,6 @@ package com.example.toptrackskotlinversion.View
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,7 +11,6 @@ import com.example.toptrackskotlinversion.Model.Constants.KEY_CAMERA_GALLERY
 import com.example.toptrackskotlinversion.Model.Constants.KEY_CAMERA_TAKEN
 import com.example.toptrackskotlinversion.R
 import com.otaliastudios.cameraview.CameraListener
-import com.otaliastudios.cameraview.CameraOptions
 import com.otaliastudios.cameraview.CameraView
 import com.otaliastudios.cameraview.PictureResult
 import com.otaliastudios.cameraview.controls.Facing
@@ -23,7 +21,7 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var capturePicture: ImageButton
     private lateinit var switchCamera: ImageButton
     private lateinit var imageGallery: ImageButton
-    private lateinit var dataPicture : ByteArray
+    private lateinit var dataPicture: ByteArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +37,7 @@ class CameraActivity : AppCompatActivity() {
             override fun onPictureTaken(result: PictureResult) {
                 super.onPictureTaken(result)
                 dataPicture = result.data
-                if (dataPicture != null){
+                if (dataPicture != null) {
                     val intentTaken = Intent()
                     intentTaken.putExtra(KEY_CAMERA_TAKEN, dataPicture)
                     setResult(RESULT_OK, intentTaken)

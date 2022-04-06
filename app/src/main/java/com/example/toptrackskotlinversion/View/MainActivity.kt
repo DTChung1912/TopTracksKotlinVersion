@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -49,10 +48,14 @@ class MainActivity : AppCompatActivity(), MainIterator.MainView, ProfileImageFor
         bottomNavigationView = findViewById(R.id.navigation_bar)
 
         ActivityCompat.requestPermissions(
-            this@MainActivity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION
+            this@MainActivity,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            REQUEST_CODE_PERMISSION
         )
         ActivityCompat.requestPermissions(
-            this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION
+            this@MainActivity,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_CODE_PERMISSION
         )
 
         presenter = MainActivityPresenter()
@@ -115,7 +118,7 @@ class MainActivity : AppCompatActivity(), MainIterator.MainView, ProfileImageFor
     }
 
     override fun getImageBitmap(imageBitmap: Bitmap) {
-        ImageUtils.loadCircleImage(profileImage,imageBitmap)
+        ImageUtils.loadCircleImage(profileImage, imageBitmap)
     }
 
 }
