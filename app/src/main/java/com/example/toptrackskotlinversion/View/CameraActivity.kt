@@ -3,10 +3,13 @@ package com.example.toptrackskotlinversion.View
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.toptrackskotlinversion.Model.Constants.CAMERA_PICTURE
+import com.example.toptrackskotlinversion.Model.Constants.KEY_CAMERA_GALLERY
+import com.example.toptrackskotlinversion.Model.Constants.KEY_CAMERA_TAKEN
 import com.example.toptrackskotlinversion.R
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraOptions
@@ -20,7 +23,7 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var capturePicture: ImageButton
     private lateinit var switchCamera: ImageButton
     private lateinit var imageGallery: ImageButton
-    private val SELECT_PICTURE: Int = 200
+    private lateinit var dataPicture : ByteArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,21 +32,19 @@ class CameraActivity : AppCompatActivity() {
         cameraView = findViewById(R.id.cameraView)
         capturePicture = findViewById(R.id.capturePicture)
         switchCamera = findViewById(R.id.switchCamera)
-        imageGallery = findViewById(R.id.switchCamera)
+        imageGallery = findViewById(R.id.imageGallery)
 
         cameraView.setLifecycleOwner(this)
         cameraView.addCameraListener(object : CameraListener() {
             override fun onPictureTaken(result: PictureResult) {
                 super.onPictureTaken(result)
-
-                val intent = Intent(this@CameraActivity, MainActivity::class.java)
-                val dataPicture: ByteArray = result.data
-                intent.putExtra(CAMERA_PICTURE, dataPicture)
-                startActivity(intent)
-            }
-
-            override fun onCameraOpened(options: CameraOptions) {
-                super.onCameraOpened(options)
+                dataPicture = result.data
+                if (dataPicture != null){
+                    val intentTaken = Intent()
+                    intentTaken.putExtra(KEY_CAMERA_TAKEN, dataPicture)
+                    setResult(RESULT_OK, intentTaken)
+                    finish()
+                }
             }
         })
 
@@ -62,32 +63,18 @@ class CameraActivity : AppCompatActivity() {
             }
         }
 
-        imageGallery.setOnClickListener {
-            openGallery()
-        }
-
-    }
-
-    private fun openGallery() {
-        val intent = Intent()
-        intent.setType("image/*")
-        intent.setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                val selectUri: Uri? = data?.data
-                if (selectUri != null) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("CHOOSER_PICTURE", selectUri.toString())
-                    startActivity(intent)
-                }
+        val getContent =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                val intentGalley = Intent()
+                intentGalley.putExtra(KEY_CAMERA_GALLERY, uri.toString())
+                setResult(RESULT_OK, intentGalley)
+                finish()
             }
+
+        imageGallery.setOnClickListener {
+            getContent.launch("image/*")
         }
+
     }
 
     override fun onResume() {

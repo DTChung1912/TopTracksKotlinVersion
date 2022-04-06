@@ -2,8 +2,8 @@ package com.example.toptrackskotlinversion.Model
 
 object Constants {
     var KEY_CURRENT_USER = "KEY_CURRENT_USER"
-    var CAMERA_PICTURE = "CAMERA_PICTURE"
-    var PICTURE_DATA = "PICTURE_DATA"
-    var CHOOSER_PICTURE = "CHOOSER_PICTURE"
-    var IMAGE_DATA = "IMAGE_DATA"
+    var KEY_CAMERA_TAKEN = "KEY_CAMERA_TAKEN"
+    var KEY_CAMERA_GALLERY = "KEY_CAMERA_GALLERY"
+
+    var REQUEST_CODE_PERMISSION = 100
 }

@@ -22,12 +22,12 @@
         android:text="Upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
     <TextView
-        android:layout_marginTop="10dp"
+        android:id="@+id/imageSize"
+        android:text="0"
+        android:textSize="30sp"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/test"
-        android:text="a"
-        android:textSize="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
