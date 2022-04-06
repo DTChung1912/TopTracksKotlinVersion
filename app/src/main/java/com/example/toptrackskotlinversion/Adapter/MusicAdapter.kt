@@ -16,35 +16,44 @@ import com.example.toptrackskotlinversion.R
 class MusicAdapter(
     private val context: Context,
     private var musicList: ArrayList<Music>,
-    private val onItemClick: OnItemClick
-) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
+    private var onItemClick: OnItemClick
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isLoadmore = false
-    private val VIEW_TYPE_ITEM = 0
-    private val VIEW_TYPE_LOADING = 1
 
+    companion object{
+        private val VIEW_TYPE_ITEM = 0
+        private val VIEW_TYPE_LOADING = 1
+    }
 
-    inner class MusicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private inner class MusicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val musicImage: ImageView? = itemView.findViewById(R.id.musicImage)
         val songName: TextView? = itemView.findViewById(R.id.songName)
         val singerName: TextView? = itemView.findViewById(R.id.singerName)
         val songRank: TextView? = itemView.findViewById(R.id.songRank)
         val listener: TextView? = itemView.findViewById(R.id.listener)
+    }
+
+    private inner class LoadmoreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val loadmore: ProgressBar? = itemView.findViewById(R.id.loadmore)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        var view = if (viewType == VIEW_TYPE_ITEM) {
-            LayoutInflater.from(context).inflate(R.layout.all_item, parent, false)
+        if (viewType == VIEW_TYPE_ITEM) {
+            return MusicViewHolder(
+                LayoutInflater.from(context).inflate(R.layout.all_item, parent, false)
+            )
         } else {
-            LayoutInflater.from(context).inflate(R.layout.load_view, parent, false)
+            return LoadmoreViewHolder(
+                LayoutInflater.from(context).inflate(R.layout.load_view, parent, false)
+            )
         }
-        return MusicViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
+    override fun onBindViewHolder( holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == VIEW_TYPE_ITEM) {
+            holder as MusicViewHolder
             val music = musicList.get(position)
             holder.songName?.text = music.songName
             holder.singerName?.text = music.singerName
@@ -58,6 +67,7 @@ class MusicAdapter(
                 onItemClick.onClicked()
             }
         } else {
+            holder as LoadmoreViewHolder
             holder.loadmore?.visibility = View.VISIBLE
         }
     }
